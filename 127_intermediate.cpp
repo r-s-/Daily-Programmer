@@ -47,7 +47,7 @@ int getmaxlength(deque<deque<int> > &db)
   return max;
 }
 
-int function(int x, int y)
+int findroutes(int x, int y)
 {
   int count = 0;
   static deque<deque<int> > db;
@@ -102,7 +102,7 @@ void callforwarding(const std::string input)
    infile>>a>>b>>c>>d;
      if (day >= c && day < c+d)
      {
-       tmp = function(a, b);
+       tmp = findroutes(a, b);
        if (max < tmp)
          max = tmp;
      }
