@@ -19,7 +19,7 @@ output.
 #include <random>
 #include <ctime>
 
-void function(std::set<std::string> db)
+void monkies(std::set<std::string> db)
 {
   std::string monkey;
   while(1)
@@ -55,6 +55,6 @@ std::set<std::string> readin(std::string input)
 int main()
 {
   srand(time(0));
-  function(readin("words107.txt"));
+  monkies(readin("words107.txt"));
 return 0;
 }
