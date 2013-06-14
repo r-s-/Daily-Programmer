@@ -1,6 +1,19 @@
 #Daily Programmer #125
 #r-s
 
+=begin
+You're a newly hired engineer for a brand-new company that's building a "killer Word-like 
+application". You've been specifically assigned to implement a tool that gives the user 
+some details on common word usage, letter usage, and some other analytics for a given 
+document! More specifically, you must read a given text file (no special formatting, 
+just a plain ASCII text file) and print off the following details:
+Number of words
+Number of letters
+Number of symbols (any non-letter and non-digit character, excluding white spaces)
+Top three most common words (you may count "small words", such as "it" or "the")
+Top three most common letters
+=end
+
 infile = File.open(ARGV[0])
 all = ""
 
