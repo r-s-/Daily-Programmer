@@ -1,3 +1,6 @@
+//Daily Programmer
+//R.selk
+
 #include <iostream>
 #include <list>
 
@@ -10,16 +13,14 @@ int main()
 	for (; aa!=a.end(); ++aa)
 	{
 		while (*aa > *bb)
-		{
 			++bb;
-		}
+
 		b.pop_front();
 		b.insert (bb, *aa);
 		bb=b.begin();
 	}
-
 	for (auto i : b)
 		std::cout<<i<<" "<<std::endl;
-		
+
 	return 0;
 }
