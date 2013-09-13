@@ -1,43 +1,22 @@
 #include <iostream>
-#include <string>
 #include <vector>
 
-int main()
-{
-  size_t num_strings;
-  std::string tempstring;
-  std::vector<std::string> allstrings;
+int main(){
+
+  std::vector<std::string>::size_type num_strings;
+  std::vector<std::string> all_strings;
   std::string::size_type maxlength = 0;
+  std::string temp_string;
 
-  std::cout<<"Enter number of strings: "<<std::endl;
-  std::cin>>num_strings;
-
-  for (size_t i = 0; i<num_strings; i++)
-  {
-    std::cout<<"Enter string number "<<i+1;
-    std::cin>>tempstring;
-    allstrings.push_back(tempstring);
-    if (tempstring.length() > maxlength) maxlength = tempstring.length();
+  std::cin>>num_strings;std::cin.ignore(1);
+  for (size_t i = 0; i<num_strings; i++) {
+    std::getline(std::cin, temp_string); 
+    all_strings.push_back(temp_string);
+    if (temp_string.length() > maxlength) maxlength = temp_string.length();
   }
-  
-  //print strings vertically
-  for (std::string::size_type x = 0; x<maxlength; x++){
-    for (size_t i = 0; i<num_strings; i++)
-    {
-      char t = allstrings[i][x];
-      if (isalpha(t))
-        std::cout<<t;
+  for (size_t x = 0; x<maxlength; x++)
+    for (size_t i = 0; i<num_strings; i++){
+      if (isprint(all_strings[i][x])) std::cout<<all_strings[i][x];
       else std::cout<<" ";  
-    } 
-  std::cout<<std::endl;
-  }
-
-
-
-
-
-
-
-
-  return 0;
+    } std::cout<<std::endl;
 }
