@@ -20,7 +20,7 @@ bool ncset(std::string word, unsigned int x)
   {
     list.insert(word[i]);
   }
-return list.size() <= x ? true : false;
+  return list.size() <= x ? true : false;
 }
 
 int main()
@@ -32,9 +32,11 @@ int main()
 
   while (file>>word)
   {
-  if (ncset(word, 4))
-     count++;
+    if (ncset(word, 4))
+    {
+      count++;
+    }
   }
   std::cout<<"Count: "<<count;
-return 0;
+  return 0;
 }

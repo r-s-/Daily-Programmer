@@ -15,6 +15,6 @@ generates the appropriate random numbers. Note that it does not matter how you s
 number generation, but you should try to as good programming practice.
 =end
 
-NdM = ARGV[0].split("d")
-1.upto(NdM[0].to_i) {print "#{Random.rand(1..NdM[1].to_i)} "}
+n,m = $*[0].split("d").map(&:to_i)
+n.times {print "#{rand(1..m)} "}
 

@@ -24,7 +24,7 @@ int main()
       {
         temp.name += *i;
         ++i;
-      } 
+      }
       if (*i == ' ')
       {
         ++i;
@@ -33,20 +33,24 @@ int main()
           temp_grade += *i;
           ++i;
         } --i;
-       temp.grades.push_back(std::atoi(temp_grade.c_str()));
-       temp_grade.erase(); 
+        temp.grades.push_back(std::atoi(temp_grade.c_str()));
+        temp_grade.erase();
       }
     }
     temp.average = std::accumulate(temp.grades.begin(), temp.grades.end(), 0.0)/temp.grades.size();
     s.push_back(temp);
-    temp.name.erase(); 
+    temp.name.erase();
     temp.grades.erase(temp.grades.begin(), temp.grades.end());
   }
-  for (auto i : s)
+for (auto i : s)
+  {
     sum += i.average;
+  }
   std::cout<<sum/s.size()<<std::endl;
-  
-  for (auto i : s)
+
+for (auto i : s)
+  {
     std::cout<<i.name<<" "<<i.average<<std::endl;
+  }
   return 0;
 }
