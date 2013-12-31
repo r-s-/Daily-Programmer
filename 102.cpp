@@ -13,30 +13,26 @@ http://code.google.com/p/dotnetperls-controls/downloads/detail?name=enable1.txt
 #include <set>
 #include <fstream>
 
-bool ncset(std::string word, unsigned int x)
+bool ncset(std::string word, size_t x)
 {
   std::set<char> list;
+
   for (std::string::size_type i = 0; i<word.length(); ++i)
-  {
     list.insert(word[i]);
-  }
+
   return list.size() <= x ? true : false;
 }
 
 int main()
 {
-  std::string word;
-  int count = 0;
-  std::ifstream file;
-  file.open("102.txt");
+  std::ifstream file("words107.txt");
 
-  while (file>>word)
+  int count = 0;
+  for (std::string word; file>>word; )
   {
     if (ncset(word, 4))
-    {
       count++;
-    }
   }
-  std::cout<<"Count: "<<count;
-  return 0;
+  
+  std::cout << "Count: " << count <<std::endl;
 }
