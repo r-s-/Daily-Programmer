@@ -1,4 +1,5 @@
 #include <iostream>
+#include <functional>
 #include <string>
 #include <memory>
 #include <sstream>
@@ -6,19 +7,28 @@
 #include <vector>
 #include <algorithm>
 
+using std::min_element;
+using std::begin; 
+using std::end;
+
 class Student{
   public:
     Student(std::string n, std::vector<int> g): grades(g), name(n){}
     double get_average() const { return ave; }
     std::string get_name() const{ return name; }
+    bool operator<(const Student &a) const{
+      return this->get_average() < a.get_average(); }
+    bool operator>(const Student &a) const{
+      return this->get_average() > a.get_average(); }
+
   private:
     std::vector<int> grades;
     std::string name;
     double ave = calculate_average();
     double calculate_average() const {
-     return std::accumulate(std::begin(grades), std::end(grades), 0) / grades.size();
-    }
+      return std::accumulate(begin(grades), end(grades), 0) / grades.size();}
 };
+using SVec = std::vector<Student>;
 
 Student process_line(std::string line){
   std::stringstream ss(line);
@@ -38,41 +48,24 @@ Student process_line(std::string line){
   return Student(name, grades);
 }
 
-std::vector<Student> read_data(std::string input_filename){
+SVec read_data(const std::string input_filename){
   std::ifstream input_handle(input_filename);
   std::vector<Student> all_students;
   for (std::string line; std::getline(input_handle, line); ){
-    all_students.push_back(process_line(line));
-  }
+    all_students.push_back(process_line(line));}
   return all_students;
 }
 
-auto sort_students(std::vector<Student> &all_students) -> decltype(all_students){
-  std::sort(std::begin(all_students), std::end(all_students),
-      [] (const Student &a, const Student &b){
- 	return b.get_average() < a.get_average();});
-  return all_students;
-}
-
-std::vector<Student>::const_iterator lowest_grade(const std::vector<Student> all_students){
-  int max = 999;
-
-  std::vector<Student>::const_iterator sid;
-
-  for (std::vector<Student>::const_iterator it = std::begin(all_students); it != std::end(all_students); ++it){
-    if (it->get_average() < max){
-      sid = it;
-    }
-  }
-  return sid;
+template<typename C>
+Student dispatch(const SVec &students, C c)
+{
+  return *min_element(begin(students), end(students),c);
 }
 
 int main(){
   auto all_students = read_data("input.txt"); 
-  auto sorted_students = sort_students(all_students);
-
-  for (auto i : all_students){
-    std::cout<< i.get_name() << " " << i.get_average() <<std::endl; }
- 
-  std::cout<< *lowest_grade(all_students) <<std::endl;
+  auto highest_grade = dispatch(all_students, std::greater<Student>());
+  auto lowest_grade = dispatch(all_students, std::less<Student>());
+  std::cout<<"highest: " << highest_grade.get_name() << std::endl;
+  std::cout<<"lowest: " << lowest_grade.get_name() << std::endl;
 }
